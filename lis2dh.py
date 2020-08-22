@@ -16,7 +16,7 @@ class Accelerometer:
     rwBit = 0b1  # Read/write bit set to "read"
     msBit = 0b0  # Multi-read bit set to "repeat"
     self.turnOn()
-    dataTransfer = spi.xfer2([(rwBit << 7) + (msBit << 6) + register] + [0])
+    dataTransfer = self.spi.xfer2([(rwBit << 7) + (msBit << 6) + register] + [0])
     self.turnOff()
     return dataTransfer[1]
   
@@ -24,7 +24,7 @@ class Accelerometer:
     rwBit = 0b1  # Read/write bit set to "read"
     msBit = 0b1  # Multi-read bit set to "auto-increment"
     self.turnOn()
-    dataTransfer = spi.xfer2([(rwBit<<7) + (msBit<<6) + register] + [0 for x in range(numBytes)])
+    dataTransfer = self.spi.xfer2([(rwBit<<7) + (msBit<<6) + register] + [0 for x in range(numBytes)])
     self.turnOff()
     return dataTransfer[1:]
   
@@ -32,7 +32,7 @@ class Accelerometer:
     rwBit = 0b0  # Read/write bit set to "write"
     msBit = 0b1  # Multi-read bit set to "auto-increment"
     self.turnOn()
-    dataTransfer = spi.xfer2([(rwBit<<7) + (msBit<<6) + register, value])
+    dataTransfer = self.spi.xfer2([(rwBit<<7) + (msBit<<6) + register, value])
     self.turnOff()
     return
   
