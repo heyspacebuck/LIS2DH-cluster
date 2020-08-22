@@ -5,7 +5,6 @@
 import time
 import spidev
 import RPi.GPIO as GPIO
-import datetime
 import lis2dh
 
 GPIO.setmode(GPIO.BCM)
@@ -41,7 +40,9 @@ for chip in chips:
 # Read each chip's acceleration into a log file, to be decoded later
 with open('raw.csv', 'a') as file:
   while True:
-    file.write('\n' + str(datetime.datetime.now().timestamp()))
+    file.write('\n')
+    file.write(str(time.time()))
     for accel in accels:
-      blah = accel.sequential_register_read(0x28, 6)  # This will be a six-element array, e.g. [244, 192, 0, 64, 79, 128]
-      file.write(',' + str(accel.cs) + ',' + str(blah))
+      file.write(accel.cscsv)
+      data = accel.sequential_register_read(0x28, 6)  # This will be a six-element array, e.g. [244, 192, 0, 64, 79, 128]
+      file.write(str(data))

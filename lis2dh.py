@@ -39,6 +39,7 @@ class Accelerometer:
   def __init__(self, spi, cs):
     self.cs = cs
     self.spi = spi
+    self.cscsv = ',' + str(self.cs) + ','
     GPIO.setup(cs, GPIO.OUT)
     GPIO.output(cs, GPIO.HIGH)
     # Set ctrl_reg4 to +- 8g
