@@ -29,10 +29,10 @@ spi = spidev.SpiDev()
 spi.open(1,0)
 
 # Configure SPI speed
-spi.max_speed_hz = 4000000 # 10 MHz fastest specified in LIS2DH datasheet
+spi.max_speed_hz = 10000000 # 10 MHz fastest specified in LIS2DH datasheet
 
 # Create instances of the accelerometer class for each chip select pin
-chips = [16]
+chips = [16, 13, 6]
 accels = []
 for chip in chips:
   accels += [lis2dh.Accelerometer(spi, chip)]
