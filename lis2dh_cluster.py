@@ -39,10 +39,13 @@ for chip in chips:
 
 # Read each chip's acceleration into a log file, to be decoded later
 with open('raw.csv', 'a') as file:
+  file.write('t')
+  for accel in accels:
+    file.write(';' + str(accel.cs))
   while True:
     file.write('\n')
     file.write(str(time.time()))
     for accel in accels:
-      file.write(accel.cscsv)
+      file.write(';')
       data = accel.sequential_register_read(0x28, 6)  # This will be a six-element array, e.g. [244, 192, 0, 64, 79, 128]
       file.write(str(data))
